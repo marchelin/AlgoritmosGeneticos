@@ -8,18 +8,37 @@ public class TargetTrigger : MonoBehaviour
 
     private bool _toDestroy = false;
 
-    public float DistanceToTarget;
+    public static float currentDistanceToTarget;
+    //public static float lastDistanceToTarget;
 
     public delegate void SetResult(float result);
 
     public event SetResult OnHitCollider;
-    // Start is called before the first frame update
+
+    public static bool obstacleCollision;
+
     public void OnCollisionEnter(Collision col)
     {
-        Debug.DrawRay(transform.position, Target.transform.position - transform.position,Color.red,10f); 
-        DistanceToTarget =Vector3.Distance(transform.position, Target.transform.position);
-        OnHitCollider(DistanceToTarget);
-        _toDestroy = true;
+        if (col.gameObject.tag == "obstacle")
+        {
+            obstacleCollision = true;
+
+            Debug.DrawRay(transform.position, Target.transform.position - transform.position, Color.red, 10f);
+            currentDistanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
+            OnHitCollider(currentDistanceToTarget);
+            _toDestroy = true;
+        }
+        else
+        {
+            obstacleCollision = false;
+
+            Debug.DrawRay(transform.position, Target.transform.position - transform.position, Color.yellow, 10f);
+            currentDistanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
+            OnHitCollider(currentDistanceToTarget);
+            _toDestroy = true;
+
+            //lastDistanceToTarget = currentDistanceToTarget;
+        }
     }
 
     public void Update()

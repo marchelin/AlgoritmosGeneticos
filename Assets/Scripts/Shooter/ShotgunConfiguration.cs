@@ -21,6 +21,8 @@ public class ShotgunConfiguration : MonoBehaviour
 
     [SerializeField] private Transform compassReference;
 
+    private float extraImpulse = 0.1f;
+
     private bool getAngle;
     private Vector3 targetRelative;
     private float angle;
@@ -29,7 +31,7 @@ public class ShotgunConfiguration : MonoBehaviour
     {
         Time.timeScale = 50f;
 
-        Genetic = new GeneticAlgorithm(10,10);
+        Genetic = new GeneticAlgorithm(20, 20);
         isReady = true;
 
         getAngle = false;
@@ -62,8 +64,33 @@ public class ShotgunConfiguration : MonoBehaviour
         shot.gameObject.GetComponent<TargetTrigger>().OnHitCollider += GetResult;
         shot.isKinematic = false;
 
-        var force = transform.up * Strength;
-        shot.AddForce(force,ForceMode.Impulse);
+        if (TargetTrigger.obstacleCollision == true)
+        {
+            for (int i = 0; i < 10000; i++)
+            {
+                if (TargetTrigger.obstacleCollision == true)
+                {
+                    //var force = (transform.up) * (Strength + (CurrentIndividual.fitness));
+                    var force = (transform.up * Strength) * extraImpulse;
+                    shot.AddForce(force, ForceMode.Impulse);
+
+                    extraImpulse += 1;
+
+                    Debug.LogError(force);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            var force = (transform.up * Strength);
+            shot.AddForce(force, ForceMode.Impulse);
+
+            Debug.LogError(force);
+        }
     }
 
     void Update()

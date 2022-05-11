@@ -28,7 +28,7 @@ public class GeneticAlgorithm
         population = new List<Individual>();
         for (int i = 0; i < size; i++)
         {
-            population.Add(new Individual(Random.Range(0f,90f), Random.Range(0f,12f)));
+            population.Add(new Individual(Random.Range(0f,90f), Random.Range(0f,15f)));
         }
         StartGeneration();
     }
