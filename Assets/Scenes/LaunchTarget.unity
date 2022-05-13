@@ -312,7 +312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257488557}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.382, y: 0.325, z: -0.55}
+  m_LocalPosition: {x: -0.281, y: 0.185, z: -0.55}
   m_LocalScale: {x: 0.1, y: 0.20000002, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1078359216}
@@ -342,7 +342,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659265799}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -350,7 +350,7 @@ Transform:
   - {fileID: 1927434135}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &659265801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,11 +376,14 @@ MonoBehaviour:
     type: 3}
   ShotPosition: {fileID: 1927434135}
   Target: {fileID: 257488561}
-  gameSpeed: 1
-  Degrees: 0
   Strength: 4
-  isReady: 0
-  compassReference: {fileID: 1565464946}
+  Degrees: 0
+  CB_Strength: 0
+  CB_Degrees: 0
+  poblacion: 100
+  gameSpeed: 1
+  done: 0
+  caseNumber: 2
 --- !u!1 &820417570
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,8 +697,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300583252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.02, z: 0}
-  m_LocalScale: {x: 18.55, y: 6.7933, z: 1}
+  m_LocalPosition: {x: 0, y: 1.21, z: -0.13}
+  m_LocalScale: {x: 18.55, y: 6.7933, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4

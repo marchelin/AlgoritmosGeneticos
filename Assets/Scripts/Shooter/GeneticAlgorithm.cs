@@ -8,7 +8,8 @@ using Random = UnityEngine.Random;
 [Serializable]
 public class GeneticAlgorithm
 {
-    
+    ShotgunConfiguration shotgunConfiguration;
+
     public List<Individual> population;
     private int _currentIndex;
 
@@ -16,6 +17,7 @@ public class GeneticAlgorithm
     public int MaxGenerations;
 
     public string Summary;
+
     public GeneticAlgorithm(int numberOfGenerations, int populationSize)
     {
         CurrentGeneration = 0;
@@ -26,10 +28,12 @@ public class GeneticAlgorithm
     public void GenerateRandomPopulation(int size)
     {
         population = new List<Individual>();
+
         for (int i = 0; i < size; i++)
         {
-            population.Add(new Individual(Random.Range(0f,90f), Random.Range(0f,15f)));
+            population.Add(new Individual(Random.Range(0, ShotgunConfiguration.currentBestDegree), Random.Range(ShotgunConfiguration.currentBestStrength, 15f)));
         }
+
         StartGeneration();
     }
 
@@ -50,11 +54,13 @@ public class GeneticAlgorithm
         if (_currentIndex == population.Count)
         {
             EndGeneration();
+
             if (CurrentGeneration >= MaxGenerations)
             {
                 Debug.Log(Summary);
                 return null;
             }
+
             StartGeneration();
         }
 
@@ -65,10 +71,22 @@ public class GeneticAlgorithm
     {
         population.Sort();
         Summary += $"{GetFittest().fitness};";
+
         if (CurrentGeneration < MaxGenerations)
         {
-            Crossover();
-            Mutation();
+            if (shotgunConfiguration.caseNumber == 1) // Case 1
+            {
+                Crossover();
+            }
+            else if (shotgunConfiguration.caseNumber == 2) // Case 2
+            {
+                Mutation();
+            }
+            else if (shotgunConfiguration.caseNumber == 3) // Case 3
+            {
+                Crossover();
+                Mutation();
+            }
         }
     }
 
@@ -80,10 +98,28 @@ public class GeneticAlgorithm
         //
 
         //Cruce Plano Mono Punto//
-        var new1 =new Individual(ind1.degree,ind2.strength);
+        var new1 = new Individual(ind1.degree, ind2.strength);
         var new2 = new Individual(ind2.degree, ind1.strength);
 
         //REEMPLAZO
+
+        /*
+        if (TargetTrigger.obstacleCollision == true)
+        {
+            for (int i = 0; i < population.Count; i++)
+            {
+                if (population[i].degree < ShotgunConfiguration.currentBestDegree)
+                {
+                    population.RemoveAt(i);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        */
+
         population.RemoveAt(population.Count - 1);
         population.RemoveAt(population.Count - 1);
         population.Add(new1);
@@ -100,7 +136,7 @@ public class GeneticAlgorithm
             }
             if (Random.Range(0f, 1f) < 0.02f)
             {
-                individual.strength = Random.Range(0f, 12f);
+                individual.strength = Random.Range(0f, 15f);
             }
         }
     }
