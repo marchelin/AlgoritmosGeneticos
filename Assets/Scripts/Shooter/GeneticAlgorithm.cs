@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 [Serializable]
 public class GeneticAlgorithm
 {
-    ShotgunConfiguration shotgunConfiguration;
+    public int caseNumber = 3;   
 
     public List<Individual> population;
     private int _currentIndex;
@@ -18,8 +18,9 @@ public class GeneticAlgorithm
 
     public string Summary;
 
-    public GeneticAlgorithm(int numberOfGenerations, int populationSize)
+    public GeneticAlgorithm(int numberOfGenerations, int populationSize, int caseType)
     {
+        caseNumber = caseType;
         CurrentGeneration = 0;
         MaxGenerations = numberOfGenerations;
         GenerateRandomPopulation(populationSize);
@@ -27,7 +28,7 @@ public class GeneticAlgorithm
     }
     public void GenerateRandomPopulation(int size)
     {
-        population = new List<Individual>();
+        population = new List<Individual>();        
 
         for (int i = 0; i < size; i++)
         {
@@ -74,18 +75,21 @@ public class GeneticAlgorithm
 
         if (CurrentGeneration < MaxGenerations)
         {
-            if (shotgunConfiguration.caseNumber == 1) // Case 1
+            if (caseNumber == 1) // Case 1
             {
                 Crossover();
+                //Debug.LogWarning("1case");
             }
-            else if (shotgunConfiguration.caseNumber == 2) // Case 2
+            else if (caseNumber == 2) // Case 2
             {
                 Mutation();
+                //Debug.LogWarning("2case");
             }
-            else if (shotgunConfiguration.caseNumber == 3) // Case 3
+            else if (caseNumber == 3) // Case 3
             {
                 Crossover();
                 Mutation();
+                //Debug.LogWarning("3case");
             }
         }
     }

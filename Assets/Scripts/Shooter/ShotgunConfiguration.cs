@@ -38,14 +38,16 @@ public class ShotgunConfiguration : MonoBehaviour
 
     [Header("Case Selection")]
     [Range(1, 3)] public int caseNumber = 1;
+    
 
     void Start()
     {
         compassReference = GameObject.Find("compassReference");
 
-        Genetic = new GeneticAlgorithm(poblacion, poblacion);
+        Genetic = new GeneticAlgorithm(poblacion, poblacion, caseNumber);
         isReady = true;
         done = false;
+
 
         getAngle = false;
         LootAtTarget();
