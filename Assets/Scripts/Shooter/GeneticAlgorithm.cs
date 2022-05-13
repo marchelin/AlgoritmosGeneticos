@@ -75,21 +75,18 @@ public class GeneticAlgorithm
 
         if (CurrentGeneration < MaxGenerations)
         {
-            if (caseNumber == 1) // Case 1
+            if (caseNumber == 1)      // Case 1
             {
                 Crossover();
-                //Debug.LogWarning("1case");
             }
             else if (caseNumber == 2) // Case 2
             {
                 Mutation();
-                //Debug.LogWarning("2case");
             }
             else if (caseNumber == 3) // Case 3
             {
                 Crossover();
                 Mutation();
-                //Debug.LogWarning("3case");
             }
         }
     }
@@ -106,24 +103,6 @@ public class GeneticAlgorithm
         var new2 = new Individual(ind2.degree, ind1.strength);
 
         //REEMPLAZO
-
-        /*
-        if (TargetTrigger.obstacleCollision == true)
-        {
-            for (int i = 0; i < population.Count; i++)
-            {
-                if (population[i].degree < ShotgunConfiguration.currentBestDegree)
-                {
-                    population.RemoveAt(i);
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        */
-
         population.RemoveAt(population.Count - 1);
         population.RemoveAt(population.Count - 1);
         population.Add(new1);
@@ -136,11 +115,11 @@ public class GeneticAlgorithm
         {
             if (Random.Range(0f, 1f) < 0.02f)
             {
-                individual.degree = Random.Range(0f, 90f);
+                individual.degree = Random.Range(0f, ShotgunConfiguration.currentBestDegree);
             }
             if (Random.Range(0f, 1f) < 0.02f)
             {
-                individual.strength = Random.Range(0f, 15f);
+                individual.strength = Random.Range(ShotgunConfiguration.currentBestStrength, 15f);
             }
         }
     }

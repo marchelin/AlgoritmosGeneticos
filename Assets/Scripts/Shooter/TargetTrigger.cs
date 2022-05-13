@@ -9,7 +9,6 @@ public class TargetTrigger : MonoBehaviour
     private bool _toDestroy = false;
 
     public static float currentDistanceToTarget;
-    //public static float lastDistanceToTarget;
 
     public delegate void SetResult(float result);
 
@@ -22,23 +21,17 @@ public class TargetTrigger : MonoBehaviour
         if (col.gameObject.tag == "obstacle")
         {
             obstacleCollision = true;
-
             Debug.DrawRay(transform.position, Target.transform.position - transform.position, Color.red, 10f);
-            currentDistanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
-            OnHitCollider(currentDistanceToTarget);
-            _toDestroy = true;
         }
         else
         {
             obstacleCollision = false;
-
             Debug.DrawRay(transform.position, Target.transform.position - transform.position, Color.yellow, 10f);
-            currentDistanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
-            OnHitCollider(currentDistanceToTarget);
-            _toDestroy = true;
-
-            //lastDistanceToTarget = currentDistanceToTarget;
         }
+
+        currentDistanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
+        OnHitCollider(currentDistanceToTarget);
+        _toDestroy = true;
     }
 
     public void Update()

@@ -17,18 +17,18 @@ public class ShotgunConfiguration : MonoBehaviour
     [Header("Shooting")]
     [SerializeField] private float Strength;
     [SerializeField] private float Degrees;
-                     public static float currentBestStrength;
+                     public static float currentBestStrength = 0;
                      public static float currentBestDegree = 90;
     [SerializeField] private float CB_Strength;
     [SerializeField] private float CB_Degrees;
 
+    // Used in LootAtTarget:
     private bool getAngle;
     private Vector3 targetRelative;
     private float angle;
 
+    // Used in CheckObstacleCollision
     private GameObject compassReference;
-
-    private float extraImpulse = 0.1f;
 
     [Header("Gameplay")]
     [SerializeField] private int poblacion;
@@ -39,7 +39,6 @@ public class ShotgunConfiguration : MonoBehaviour
     [Header("Case Selection")]
     [Range(1, 3)] public int caseNumber = 1;
     
-
     void Start()
     {
         compassReference = GameObject.Find("compassReference");
@@ -47,7 +46,6 @@ public class ShotgunConfiguration : MonoBehaviour
         Genetic = new GeneticAlgorithm(poblacion, poblacion, caseNumber);
         isReady = true;
         done = false;
-
 
         getAngle = false;
         LootAtTarget();
